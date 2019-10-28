@@ -7,5 +7,17 @@ output:
     theme: cerulean
 ---
 
-# This is my awesome website
+# This is me
+![](me.jpg)
+
+# Some interesting things about me
+
+- I really love doing some amazing cuisine!
+- I keep the short hair from I was born (actually i am a girl)!
+- I really love the spicy food!
+- I really love the LEGO!
+
+# The academic and professional experience
+- I finished the bachelor degree in China Agriculture University and Colorado University in Denver
+- See more things in [my resume](cv.html)
 
