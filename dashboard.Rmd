@@ -27,7 +27,8 @@ instacart%>%
 filter(n >10000) %>%
   ungroup() %>%
   mutate(aisle = fct_reorder(aisle, n)) %>%
-  plot_ly(x= ~aisle, y=~n, type = "bar", color = ~aisle)
+  rename("order_number" = n) %>%
+  plot_ly(x= ~aisle, y=~order_number, type = "bar", color = ~aisle)
 
 ```
 
@@ -45,7 +46,8 @@ instacart%>%
   filter(aisle %in% c("fresh vegetables", "fresh fruits", "packaged vegetables fruits")) %>%
    group_by(aisle, order_dow) %>%
      count() %>%
- plot_ly(x=~order_dow, y = ~n, color = ~aisle, type = "scatter", mode = "line")
+  rename("order_number" = n) %>%
+ plot_ly(x=~order_dow, y = ~order_number, color = ~aisle, type = "scatter", mode = "line")
            
 ```
  
