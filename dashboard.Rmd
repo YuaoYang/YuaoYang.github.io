@@ -1,0 +1,65 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+editor_options: 
+  chunk_output_type: inline
+---
+
+
+```{r, include=FALSE}
+library(tidyverse)
+library(viridis)
+library(p8105.datasets)
+library(plotly)
+library(flexdashboard)
+```
+
+### Chart 1
+```{r, echo = FALSE,warning=FALSE}
+data("instacart")
+instacart%>%
+  group_by(aisle) %>%
+  count() %>%
+  arrange(n) %>%
+filter(n >10000) %>%
+  ungroup() %>%
+  mutate(aisle = fct_reorder(aisle, n)) %>%
+  plot_ly(x= ~aisle, y=~n, type = "bar", color = ~aisle)
+
+```
+
+### Chart 2
+```{r, echo = FALSE, warning=FALSE}
+instacart%>% 
+   mutate(order_dow = recode(order_dow, 
+                           "0" ="Sunday",
+                           "1" ="Monday",
+                           "2" ="Tuseday",
+                           "3" ="Wednesday",
+                           "4" = "Thursday",
+                           "5" = "Friday",
+                           "6" = "Saturday")) %>%
+  filter(aisle %in% c("fresh vegetables", "fresh fruits", "packaged vegetables fruits")) %>%
+   group_by(aisle, order_dow) %>%
+     count() %>%
+ plot_ly(x=~order_dow, y = ~n, color = ~aisle, type = "scatter", mode = "line")
+           
+```
+ 
+ 
+ 
+### Chart 3
+
+
+```{r, echo = FALSE, warning=FALSE}
+instacart %>%
+  group_by(department) %>%
+  plot_ly(y = ~order_hour_of_day, color = ~ department, type = "box")
+```
+ 
+ 
+
+
