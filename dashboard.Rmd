@@ -15,7 +15,7 @@ library(plotly)
 
 ```
 
-Column {data-width=500}
+Column {data-width=450}
 -----------------------------------------------------------------------
 
 ### Chart A
@@ -31,10 +31,11 @@ filter(n >10000) %>%
   mutate(aisle = fct_reorder(aisle, n)) %>%
   rename("order_number" = n) %>%
   plot_ly(x= ~aisle, y=~order_number, type = "bar", color = ~aisle)
+# I try to make a plot of the order numbers of aisle which is more than 10000.
 
 ```
 
-Column {data-width=500}
+Column {data-width=550}
 -----------------------------------------------------------------------
 
 ### Chart B
@@ -54,7 +55,7 @@ instacart%>%
      count() %>%
   rename("order_number" = n) %>%
  plot_ly(x=~order_dow, y = ~order_number, color = ~aisle, type = "scatter", mode = "line")
-      
+# I try to make plot that can show the oder time changing with the weekdays in the three most sell aisles.
 ```
 
 ### Chart C
@@ -63,5 +64,5 @@ instacart%>%
 instacart %>%
   group_by(department) %>%
   plot_ly(y = ~order_hour_of_day, color = ~ department, type = "box")
-
+# I try to make a plot that shows the range of order hour of one day in different departments.
 ```
