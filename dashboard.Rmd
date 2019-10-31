@@ -1,23 +1,25 @@
 ---
-title: "Dashboard"
+title: "dashboard"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
-editor_options: 
-  chunk_output_type: inline
 ---
 
-
-```{r, include=FALSE}
+```{r setup, include=FALSE}
+library(flexdashboard)
 library(tidyverse)
 library(viridis)
 library(p8105.datasets)
 library(plotly)
-library(flexdashboard)
+
 ```
 
-### Chart 1
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
 ```{r, echo = FALSE,warning=FALSE}
 data("instacart")
 instacart%>%
@@ -32,6 +34,40 @@ filter(n >10000) %>%
 
 ```
 
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r, echo = FALSE, warning=FALSE}
+instacart%>% 
+   mutate(order_dow = recode(order_dow, 
+                           "0" ="Sunday",
+                           "1" ="Monday",
+                           "2" ="Tuseday",
+                           "3" ="Wednesday",
+                           "4" = "Thursday",
+                           "5" = "Friday",
+                           "6" = "Saturday")) %>%
+  filter(aisle %in% c("fresh vegetables", "fresh fruits", "packaged vegetables fruits")) %>%
+   group_by(aisle, order_dow) %>%
+     count() %>%
+  rename("order_number" = n) %>%
+ plot_ly(x=~order_dow, y = ~order_number, color = ~aisle, type = "scatter", mode = "line")
+      
+```
+
+### Chart C
+
+```{r, echo = FALSE, warning=FALSE}
+instacart %>%
+  group_by(department) %>%
+  plot_ly(y = ~order_hour_of_day, color = ~ department, type = "box")
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
 
 ### Chart 2
 ```{r, echo = FALSE, warning=FALSE}
@@ -63,8 +99,6 @@ instacart %>%
   plot_ly(y = ~order_hour_of_day, color = ~ department, type = "box")
 ```
  
-```{r, echo = FALSE,warning=FALSE}
-rmarkdown::render("Dashboard.Rmd", output_format = "flexdashboard::flex_dashboard")
-```
+
 
 
