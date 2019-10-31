@@ -15,27 +15,21 @@ library(plotly)
 
 ```
 
-Column {data-width=450}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
 ### Chart A
 
 ```{r, echo = FALSE,warning=FALSE}
-data("instacart")
-instacart%>%
-  group_by(aisle) %>%
-  count() %>%
-  arrange(n) %>%
-filter(n >10000) %>%
-  ungroup() %>%
-  mutate(aisle = fct_reorder(aisle, n)) %>%
-  rename("order_number" = n) %>%
-  plot_ly(x= ~aisle, y=~order_number, type = "bar", color = ~aisle)
-# I try to make a plot of the order numbers of aisle which is more than 10000.
+
+instacart %>%
+  group_by(department) %>%
+  plot_ly(y = ~order_hour_of_day, color = ~ department, type = "box")
+# I try to make a plot that shows the range of order hour of one day in different departments.data("instacart")
 
 ```
 
-Column {data-width=550}
+Column {data-width=500}
 -----------------------------------------------------------------------
 
 ### Chart B
@@ -61,8 +55,15 @@ instacart%>%
 ### Chart C
 
 ```{r, echo = FALSE, warning=FALSE}
-instacart %>%
-  group_by(department) %>%
-  plot_ly(y = ~order_hour_of_day, color = ~ department, type = "box")
-# I try to make a plot that shows the range of order hour of one day in different departments.
+instacart%>%
+  group_by(aisle) %>%
+  count() %>%
+  arrange(n) %>%
+filter(n >10000) %>%
+  ungroup() %>%
+  mutate(aisle = fct_reorder(aisle, n)) %>%
+  rename("order_number" = n) %>%
+  plot_ly(x= ~aisle, y=~order_number, type = "bar", color = ~aisle)
+# I try to make a plot of the order numbers of aisle which is more than 10000.
+
 ```
