@@ -32,6 +32,7 @@ filter(n >10000) %>%
 
 ```
 
+
 ### Chart 2
 ```{r, echo = FALSE, warning=FALSE}
 instacart%>% 
@@ -62,6 +63,8 @@ instacart %>%
   plot_ly(y = ~order_hour_of_day, color = ~ department, type = "box")
 ```
  
- 
+```{r, echo = FALSE,warning=FALSE}
+rmarkdown::render("Dashboard.Rmd", output_format = "flexdashboard::flex_dashboard")
+```
 
 
