@@ -19,7 +19,7 @@ output:
 
 # The academic and professional experience
 - I finished the bachelor degree in China Agriculture University and Colorado University in Denver
-- See more things in [my resume](cv.html)
+
 
 # Flexible Dashboard 
 - This is the my [dashboard](dashboard.html)
